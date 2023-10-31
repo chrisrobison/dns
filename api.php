@@ -15,7 +15,7 @@ if (mysqli_connect_errno()) {
 
 $out = array();
 
-if ($in['x']) {
+if (array_key_exists("x", $in)) {
     switch($in['x']) {
         case "get_zones":
             $out = getZones();

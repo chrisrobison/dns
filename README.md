@@ -1,2 +1,4 @@
-# dns
-Web-based DNS administration that doesn't suck
+# DNS Admin
+Web-based DNS administration that hopefully doesn't suck or at least sucks less.
+
+
