@@ -2,3 +2,7 @@ AuthType Basic
 AuthName "DNS Administration"
 AuthUserFile /etc/apache2/.htpasswd
 Require valid-user
+
+<Files ".env">
+    Require all denied
+</Files>

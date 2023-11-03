@@ -473,7 +473,7 @@ modified: 2022-09-28 18:30:32
                                 f.classList.remove("focus", "current");
                                 prevRow.classList.add("current", "focus");
                                 app.loadRecord(prevRow.dataset.id);
-                                f.scrollIntoView();
+                                f.scrollIntoView({block: "center", inline: "nearest", behavior: "smooth" });
                             } else if (f && f.tagName === "LI") {
                                 let prevRow = f.previousSibling;
                                 if (prevRow===null) prevRow = f.parentElement.lastChild;
@@ -481,7 +481,7 @@ modified: 2022-09-28 18:30:32
                                 f.classList.remove("focus", "current");
                                 prevRow.classList.add("current", "focus");
                                 app.selectZone(prevRow.innerText);
-                                f.scrollIntoView();
+                                f.scrollIntoView({block: "center", inline: "nearest", behavior: "smooth" });
                             }
                             evt.preventDefault();
                             break;
@@ -494,7 +494,7 @@ modified: 2022-09-28 18:30:32
                                 f.classList.remove("focus", "current");
                                 nextRow.classList.add("current", "focus");
                                 app.loadRecord(nextRow.dataset.id);
-                                f.scrollIntoView();
+                                f.scrollIntoView({block: "center", inline: "nearest", behavior: "smooth" });
                             } else if (f && f.tagName === "LI") {
                                 let nextRow = $(".focus+li");
                                 if (!nextRow) nextRow = f.parentElement.firstChild;
@@ -502,7 +502,7 @@ modified: 2022-09-28 18:30:32
                                 f.classList.remove("focus", "current");
                                 nextRow.classList.add("current", "focus");
                                 app.selectZone(nextRow.innerText);
-                                f.scrollIntoView();
+                                f.scrollIntoView({block: "center", inline: "nearest", behavior: "smooth" });
                             }
                             evt.preventDefault();
                             break;
