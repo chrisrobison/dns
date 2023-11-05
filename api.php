@@ -15,11 +15,11 @@ if (mysqli_connect_errno()) {
 
 $out = array();
 
-$in['x'] = "new_record";
-$in['domain'] = "crblackjack.com";
-$in['host'] = "test";
-$in['type'] = "TXT";
-$in['data'] = "Testing TXT record";
+// $in['x'] = "new_record";
+//$in['domain'] = "crblackjack.com";
+//$in['host'] = "test";
+//$in['type'] = "TXT";
+//$in['data'] = "Testing TXT record";
 
 if (array_key_exists("x", $in)) {
     switch($in['x']) {

@@ -363,11 +363,11 @@
                                 <label for="resp_contact">Contact</label> <input class='soa' type="email" id="resp_contact" style="width:15rem;" placeholder="user@example.com">
                             </div>
                             <div style="white-space:nowrap;">
-                                <label for="serial">Serial</label> <input class='soa' type="number" id="serial" name="serial" style="width:8rem;">
-                                <label for="serial">Refresh</label> <input class='soa' type="number" id="refresh" name="refresh" style="width:4rem;"><br>
-                                <label for="serial">Retry</label> <input class='soa' type="number" id="retry" name="retry" style="width:4rem;">
-                                <label for="serial">Expire</label> <input class='soa' type="number" id="expire" name="expire" style="width:6rem;">
-                                <label for="serial">Min</label> <input class='soa' type="number" id="minimum" name="minimum" style="width:4rem;">
+                                <label for="serial">Serial</label> <input class='soa' type="number" id="serial" name="serial" style="width:8rem;"><br>
+                                <label for="serial">Refresh</label> <input class='soa' type="number" id="refresh" name="refresh" style="width:4rem;">
+                                <span><label for="serial">Retry</label> <input class='soa' type="number" id="retry" name="retry" style="width:4rem;"></span>
+                                <span style="display:none;"><label for="serial">Expire</label> <input class='soa' type="number" id="expire" name="expire" style="width:6rem;"></span>
+                                <span style="display:none;"><label for="serial">Min</label> <input class='soa' type="number" id="minimum" name="minimum" style="width:4rem;"></span>
                             </div>
                         </div>
                     </fieldset>
@@ -391,24 +391,6 @@
         </form>
     </main>
     <script>
-        /*
-id: 1
-zone: pimp.net
-ttl: 3600
-type: SOA
-host: @
-mx_priority: NULL
-data: NULL
-primary_ns: ns.netoasis.net.
-resp_contact: cdr@netoasis.net
-serial: 2023031601
-refresh: 14400
-retry: 3600
-expire: 1209600
-minimum: 28800
-mac: NULL
-modified: 2022-09-28 18:30:32
-                                                                                                                                                                                */
         (function() {
             const $ = str => document.querySelector(str);
             const $$ = str => document.querySelectorAll(str);
@@ -485,7 +467,7 @@ modified: 2022-09-28 18:30:32
                             }
                             evt.preventDefault();
                             break;
-                        case 39:
+                        case 39: // right
                         case 40: // down
                             if (f && f.tagName === "TR") {
                                 let nextRow = $(".current.focus+tr");
