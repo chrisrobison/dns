@@ -3,6 +3,10 @@ AuthName "DNS Administration"
 AuthUserFile /etc/apache2/.htpasswd
 Require valid-user
 
-<Files ".env">
+<FilesMatch "^\.env">
     Require all denied
+</FilesMatch>
+
+<Files "api">
+    ForceType application/x-httpd-php
 </Files>

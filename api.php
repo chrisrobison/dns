@@ -14,13 +14,18 @@ if (mysqli_connect_errno()) {
 }
 
 $out = array();
+$pathinfo = preg_split("/\//", $_SERVER['PATH_INFO']);
+if ($pathinfo[0] == "") array_shift($pathinfo);
 
-// $in['x'] = "new_record";
-//$in['domain'] = "crblackjack.com";
-//$in['host'] = "test";
-//$in['type'] = "TXT";
-//$in['data'] = "Testing TXT record";
+$rsc = array_shift($pathinfo);
+$action = array_shift($pathinfo);
+if (count($pathinfo)) {
+    $id = array_shift($pathinfo);
+}
 
+if ($action === "get") {
+    
+}
 if (array_key_exists("x", $in)) {
     switch($in['x']) {
         case "get_zones":
@@ -138,7 +143,8 @@ function newRecord() {
 function rmZone($domain) {
     global $link;
     global $in;
-    
+    global $env;
+
     if (!isset($domain)) {
         $out = new stdClass();
         $out->status = "error";
@@ -146,7 +152,7 @@ function rmZone($domain) {
         return $out;
     }
 
-    $backup = `mysqldump --compact -t -upimp -ppimpin -w"zone='{$domain}'" system dns`;
+    $backup = `mysqldump --compact -t -u{$env->db->user} -p{$env->db->pass} -w"zone='{$domain}'" system dns`;
 
     $dumpfile = "/home/cdr/backup/$domain";
     if (file_exists($dumpfile.".sql")) {
