@@ -521,14 +521,16 @@
                     app.fetch("api.php?x=get_zone&zone=" + zone, app.loadZone);
                 },
                 changeZone(evt) {
-                    $("li.current")?.classList.remove("focus", "current");
-                    $(".focus")?.classList.remove("focus");
-                    evt.target.classList.add('current',"focus");
-                    $(".recordWrap").style.display = "none";
-                    $("#editor").style.display = "block";
-                    app.state.currentZone = evt.target.innerText;
-                    console.log("Selected zone " + app.state.currentZone);
-                    app.fetch("api.php?x=get_zone&zone=" + evt.target.innerText, app.loadZone);
+                    if (evt.target.tagName === "LI") {
+                        $(".current")?.classList.remove("focus", "current");
+                        $(".focus")?.classList.remove("focus");
+                        evt.target.classList.add('current',"focus");
+                        $(".recordWrap").style.display = "none";
+                        $("#editor").style.display = "block";
+                        app.state.currentZone = evt.target.innerText;
+                        console.log("Selected zone " + app.state.currentZone);
+                        app.fetch("api.php?x=get_zone&zone=" + evt.target.innerText, app.loadZone);
+                    }
                 },
                 loadRecord(id) {
                     let rec = app.data.find((el) => el.id == id);
