@@ -73,7 +73,6 @@
         #zones-wrap {
             display: inline-block;
             height: 100%;
-            width: 25rem;
             background-color: #fff;
             color: #000;
             overflow-y: scroll;
@@ -85,10 +84,12 @@
         form {
             display: flex;
             flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            align-content: flex-start;
         }
         
         .zones {
-            width: 33vw;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -139,6 +140,16 @@
             width: 2rem;
         }
         
+        .records {
+            min-width: 70vw;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .zones {
+            max-width: 40vw;
+            resize: horizontal;
+        }
         .zone {
             width: 23rem;
             vertical-align: top;
@@ -184,31 +195,22 @@
         }
         
         #editor {
-            position: fixed;
-            bottom: 0px;
-            right: 0px;
-            width: 60vw;
-            height: 50vh;
-        }
-        
-        #details {
-            position: fixed;
-            top: 0px;
-            right: 0px;
-            width: 70vw;
-            height: 50vh;
+            resize: vertical;
             overflow-y: scroll;
         }
         
+        #details {
+            height: 50vh;
+            overflow-y: scroll;
+            resize: vertical;
+        }
+        
         .zones {
-            width: 45vw;
             margin: 0px;
             padding: 0px;
             line-height: 150%;
-            position: fixed;
-            left: 0px;
-            top: 0px;
             height: 100vh;
+            overflow: hidden;
         }
         
         #zones li {
@@ -275,21 +277,22 @@
             background-size: contain;
             height: 1.5rem;
             width: 1.5rem;
-            margin-top: 1px;
+            margin-top: 0px;
             background-color: #222;
-            border: 2px solid #222;
-            border-top-right-radius: 6px;
-            border-bottom-right-radius: 6px;
-            filter: invert(1);
+            border: 0px solid #222;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
             padding: 0px;
         }
         
         #search {
-            width: 18rem;
             margin-left: 0.25rem;
             padding: 0px;
             margin-right: 0px;
             height: 1.55rem;
+            font-size: 18px;
+            border: 0px;
+            border-radius: 1em;
         }
         
         #zones .hidden {
