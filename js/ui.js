@@ -1,5 +1,8 @@
 // ui.js - UI Management and Event Handling
-const UIService = {
+import { ZoneManager } from './zones.js';
+import { KeyboardManager } from './keyboard.js';
+
+export const UIService = {
     elements: {
         zoneList: () => document.querySelector('#zones'),
         recordTable: () => document.querySelector('#zone-details'),

@@ -1,5 +1,8 @@
 // records.js - DNS Record Management
-const RecordManager = {
+import { StateManager } from './state.js';
+import { UIService } from './ui.js';
+
+export const RecordManager = {
     loadZoneRecords(records) {
         let output = '';
         records.forEach((record, index) => {

@@ -1,5 +1,5 @@
 // state.js - Application State Management
-const StateManager = {
+export const StateManager = {
     state: {
         loaded: false,
         currentZone: null,

@@ -1,5 +1,7 @@
 // keyboard.js - Keyboard Navigation
-const KeyboardManager = {
+import { CONFIG } from './config.js';
+
+export const KeyboardManager = {
     getKeyHandler(keyCode) {
         const handlers = {
             [CONFIG.KEYCODES.UP]: this.handleUpDown.bind(this, 'up'),

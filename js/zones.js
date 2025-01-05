@@ -1,5 +1,10 @@
 // zones.js - Zone Management
-const ZoneManager = {
+import { APIService } from './api.js';
+import { StateManager } from './state.js';
+import { RecordManager } from './records.js';
+import { UIService } from './ui.js';
+
+export const ZoneManager = {
     async loadZones() {
         const data = await APIService.getZones();
         return this.renderZoneList(data);

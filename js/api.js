@@ -1,5 +1,8 @@
 // api.js - API Communication Module
-const APIService = {
+import { CONFIG } from './config.js';
+import { UIService } from './ui.js';
+
+export const APIService = {
     async fetchData(url) {
         try {
             const response = await fetch(url);
