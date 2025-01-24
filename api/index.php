@@ -1,5 +1,5 @@
 <?php
-include('.env');
+include('../.env');
 
 $in = $_REQUEST;
 $out = array();
