@@ -235,7 +235,8 @@ function getZones() {
     while ($row = mysqli_fetch_object($result)) {
         $out[] = $row->zone;
     }
-    return $out;
+    $wrap = ["status"=>"ok", "data"=>$out];
+    return $wrap;
 }
 
 function getZone() {
@@ -247,5 +248,6 @@ function getZone() {
     while ($row = mysqli_fetch_object($result)) {
         $out[] = $row;
     }
-    return $out;
+    $wrap = ["status"=>"ok", "data"=>$out];
+    return $wrap;
 }
