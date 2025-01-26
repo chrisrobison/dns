@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --header-height: 46px;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Lexend", "Helvetica Neue", "Helvetica", sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #ccc;
+        }
+        
+        header {
+            background-color: #333;
+            color: #eee;
+            height: 46px;
+            display: flex;
+            width: 100%;
+            align-items: center;
+            padding-left: 1em;
+        }
+        .tools {
+            margin-left: 2em;
+        }
+        
+        main {
+            background-color: #bbb;
+            color: #222;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        footer {
+            background-color: #666;
+            color: #eee;
+            height: 0vh;
+        }
+        
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+        
+        li {
+            display: flex;
+            flex-direction: row;
+            white-space: nowrap;
+            padding: 0.25rem;
+            background-clip: border-box;
+            cursor: pointer;
+            color: #444;
+            transition: all 150ms linear;
+            transform: scale(1);
+        }
+        
+        li:hover {
+            background-color: #ff06;
+            color: #333;
+        }
+        
+        #zones-wrap {
+            display: inline-block;
+            height: 100%;
+            background-color: #fff;
+            color: #000;
+            overflow-y: scroll;
+        }
+        #zones li {
+            width: 100%;
+            display: inline-block;
+        }
+        form {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            align-content: flex-start;
+        }
+        
+        .zones {
+            height: calc(100vh - var(--header-height));
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .current {
+            background-color: #666;
+            color: #fff;
+        }
+        
+        .current.focus {
+            background-color: #039;
+            color: #fff;
+        }
+        
+        table {
+            border-collapse: collapse;
+        }
+        
+        tr td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 4px;
+            border-right: 1px solid #0006;
+            background: #fff;
+            cursor: pointer;
+        }
+        
+        tr:nth-child(2n) td {
+            background-color: #eee;
+        }
+        
+        th {
+            background: #222;
+            color: #eee;
+            padding: 4px;
+            height: 2rem;
+            vertical-align: top;
+            text-align: center;
+        }
+        
+        #id {
+            width: 3rem;
+        }
+        
+        .id {
+            width: 2rem;
+        }
+        
+        .records {
+            min-width: 70vw;
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - var(--header-height));
+        }
+        .zones {
+            max-width: 40vw;
+            resize: horizontal;
+        }
+        .zone {
+            width: 23rem;
+            vertical-align: top;
+            text-align: center;
+        }
+        
+        .ttl {
+            width: 2rem;
+        }
+        
+        .type {
+            width: 4rem;
+        }
+        
+        .host {
+            width: 6rem;
+        }
+        
+        .mx_pri {
+            width: 2rem;
+        }
+        
+        .data {
+            width: 30rem;
+            overflow: hidden;
+        }
+        .delete {
+            float:right;
+            transition: all 500ms linear;
+            transition-delay: 1s;
+            opacity: 0;
+            color: #0005;
+        }
+        li:hover .delete {
+            opacity: 1;
+        }
+        fieldset {
+            line-height: 150%;
+        }
+        
+        .focus {
+            border: 1px dashed #ff0;
+        }
+        
+        #editor {
+            resize: vertical;
+            overflow-y: scroll;
+        }
+        
+        #details {
+            display: flex;
+            height: 50vh;
+            overflow-y: scroll;
+            resize: vertical;
+        }
+        
+        .zones {
+            margin: 0px;
+            padding: 0px;
+            line-height: 150%;
+            height: calc(100vh - var(--header-height));
+            overflow: hidden;
+        }
+        
+        #zones li {
+            padding-left: 1rem;
+        }
+        
+        #zones {
+            height: 100%;
+        }
+        
+        .zones div {
+            padding: 4px;
+            background: #222;
+            color: #eee;
+            height: 2rem;
+        }
+        
+        th {
+            height: 2rem;
+            padding: 4px;
+            line-height: 150%;
+            position: sticky;
+            top: 0;
+        }
+        
+        #editor {
+            line-height: 175%;
+            background-color: #ddd;
+            border-top: 1px solid #0006;
+            padding-left: 1rem;
+            padding-top: 0.5rem;
+            font-size: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            flex: 1 2 50vh;
+        }
+        
+        .empty {
+            border:0;
+        }
+        
+        input,
+        select {
+            font-size: 18px;
+        }
+        
+        #editor label {
+            width: 8rem;
+            display: inline-block;
+            text-align: right;
+            padding: 0.25rem;
+        }
+        
+        tr.current td {
+            background: #666;
+        }
+        
+        tr.current.focus td {
+            background: #039c;
+        }
+        
+        #searchBtn {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='1em' viewBox='0 0 512 512'%3E%3Cpath fill='%23eee' d='M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat no-repeat;
+            background-position: center center;
+            background-size: contain;
+            height: 1.5rem;
+            width: 1.5rem;
+            margin-top: 0px;
+            background-color: #222;
+            border: 0px solid #222;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            padding: 0px;
+        }
+        
+        #search {
+            margin-left: 0.25rem;
+            padding: 0px;
+            margin-right: 0px;
+            height: 1.55rem;
+            font-size: 18px;
+            border: 0px;
+            border-radius: 1em;
+            width: 4em;
+            transition: all 300ms linear;
+        }
+        #search:hover, #search:focus {
+            width: 8em;
+        }
+        
+        #zones .hidden {
+            display: none !important;
+        }
+        legend#zone {
+            font-size: 2rem;
+        }
+        .current.focus td[contenteditable="true"] {
+            color: #eee;
+            background: #039c;
+        }
+        
+        .current td[contenteditable="true"]:focus {
+            background-color: #eee;
+            color: #222;
+        }
+        
+        .soa {
+            width: 20rem;
+        }
+        .recordWrap {
+            display; none;
+        }
+        #editor {
+            display: none;
+        }
+        .icon {
+            background-size: 32px 32px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 36px;
+            width: 36px;
+            border-radius: 4px;
+            background-color: #fff0;
+            border: 0;
+            transition: all 100ms linear;
+            filter: invert(1);
+        }
+        .icon:hover {
+            background-color: #0006;
+            border: 1px soid #0003;
+            transform: scale(1.2);
+        }
+        .icon.new-record {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='16.479 22.17 284.525 280.002' width='225.794px' height='224.074px' xmlns:bx='https://boxy-svg.com'%3E%3Cdefs%3E%3C/defs%3E%3Cg transform='matrix(13.950846, 0, 0, 13.950846, 10.456044, 14.602615)'%3E%3Cpath d='M6 3C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H9.59971C9.43777 16.6832 9.30564 16.3486 9.20703 16H6C4.89543 16 4 15.1046 4 14V7H16V9.20703C16.3486 9.30564 16.6832 9.43777 17 9.59971V6C17 4.34315 15.6569 3 14 3H6ZM4 6C4 4.89543 4.89543 4 6 4H14C15.1046 4 16 4.89543 16 6L4 6ZM14.0848 9.01543C14.041 9.00491 13.9958 8.99967 13.95 9.00008H9.54999C9.40674 8.99771 9.26811 9.05072 9.16299 9.14808C9.11266 9.19145 9.07227 9.24517 9.04458 9.30557C9.0169 9.36597 9.00256 9.43163 9.00256 9.49808C9.00256 9.56452 9.0169 9.63018 9.04458 9.69058C9.07227 9.75099 9.11266 9.8047 9.16299 9.84808V9.85208C9.26811 9.94943 9.40674 10.0024 9.54999 10.0001H11.3368C12.1254 9.44474 13.0665 9.09143 14.0848 9.01543ZM5.57798 9.10993C5.52532 9.23314 5.49876 9.36593 5.49998 9.49993C5.50298 9.63673 5.52936 9.77202 5.57798 9.89993C5.62398 10.0182 5.69611 10.1245 5.78898 10.2109C5.88254 10.2994 5.99084 10.3708 6.10898 10.4219C6.23252 10.4747 6.36566 10.5012 6.49998 10.4999C6.63471 10.506 6.76891 10.4793 6.89098 10.4219C7.00997 10.3688 7.11838 10.2946 7.21098 10.2029C7.30044 10.1132 7.37204 10.0074 7.42198 9.89093C7.47472 9.76738 7.50128 9.63425 7.49998 9.49993C7.50019 9.36603 7.47367 9.23344 7.42198 9.10993C7.3725 8.98864 7.29786 8.87923 7.20298 8.78893C7.10907 8.70093 7.00085 8.62958 6.88298 8.57793C6.76206 8.52577 6.63166 8.49921 6.49998 8.49993C6.36508 8.49573 6.2311 8.52348 6.10898 8.58093C5.99038 8.63475 5.88209 8.70886 5.78898 8.79993C5.7 8.88926 5.62845 8.99439 5.57798 9.10993ZM5.49998 13.4999C5.49876 13.3659 5.52532 13.2331 5.57798 13.1099C5.62812 12.9933 5.69969 12.8871 5.78898 12.7969C5.88192 12.7059 5.99026 12.6321 6.10898 12.5789C6.23113 12.5217 6.36521 12.4946 6.49998 12.4999C6.63178 12.4991 6.76228 12.526 6.88298 12.5789C7.00101 12.6299 7.10929 12.7009 7.20298 12.7889C7.29786 12.8792 7.3725 12.9886 7.42198 13.1099C7.47367 13.2334 7.50019 13.366 7.49998 13.4999C7.50128 13.6342 7.47472 13.7674 7.42198 13.8909C7.37184 14.0075 7.30026 14.1137 7.21098 14.2039C7.11804 14.2949 7.0097 14.3688 6.89098 14.4219C6.76891 14.4793 6.63471 14.506 6.49998 14.4999C6.36566 14.5012 6.23252 14.4747 6.10898 14.4219C5.99084 14.3708 5.88254 14.2994 5.78898 14.2109C5.69599 14.1242 5.62385 14.0175 5.57798 13.8989C5.52947 13.7713 5.5031 13.6364 5.49998 13.4999ZM17.0001 18.2416C16.26 18.7361 15.39 19 14.5 19C13.3065 19 12.1619 18.5259 11.318 17.682C10.4741 16.8381 10 15.6935 10 14.5C10 13.61 10.2639 12.74 10.7584 11.9999C11.2529 11.2599 11.9557 10.6831 12.7779 10.3425C13.6002 10.0019 14.505 9.91283 15.3779 10.0865C16.2508 10.2601 17.0526 10.6887 17.682 11.318C18.3113 11.9474 18.7399 12.7492 18.9135 13.6221C19.0872 14.495 18.9981 15.3998 18.6575 16.2221C18.3169 17.0443 17.7401 17.7471 17.0001 18.2416ZM14.8536 12.1464C14.7598 12.0527 14.6326 12 14.5 12C14.3674 12 14.2402 12.0527 14.1464 12.1464C14.0527 12.2402 14 12.3674 14 12.5V14H12.5C12.3674 14 12.2402 14.0527 12.1464 14.1464C12.0527 14.2402 12 14.3674 12 14.5C12 14.6326 12.0527 14.7598 12.1464 14.8536C12.2402 14.9473 12.3674 15 12.5 15H14V16.5C14 16.6326 14.0527 16.7598 14.1464 16.8536C14.2402 16.9473 14.3674 17 14.5 17C14.6326 17 14.7598 16.9473 14.8536 16.8536C14.9473 16.7598 15 16.6326 15 16.5V15H16.5C16.6326 15 16.7598 14.9473 16.8536 14.8536C16.9473 14.7598 17 14.6326 17 14.5C17 14.3674 16.9473 14.2402 16.8536 14.1464C16.7598 14.0527 16.6326 14 16.5 14H15V12.5C15 12.3674 14.9473 12.2402 14.8536 12.1464Z' fill='%23212121'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+        }
+        .icon.delete-record {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300.83 299.703' xmlns:bx='https://boxy-svg.com'%3E%3Cg transform='matrix(11.153337, 0, 0, 11.153337, 25.889954, -14.529743)'%3E%3Cpath d='M 2.105 6.516 C 2.105 5.549 2.889 4.766 3.855 4.766 L 16.355 4.766 C 17.322 4.766 18.105 5.549 18.105 6.516 L 18.105 9.016 C 18.105 9.982 17.322 10.766 16.355 10.766 L 3.855 10.766 C 2.889 10.766 2.105 9.982 2.105 9.016 L 2.105 6.516 Z M 3.855 6.266 C 3.717 6.266 3.605 6.377 3.605 6.516 L 3.605 9.016 C 3.605 9.154 3.717 9.266 3.855 9.266 L 16.355 9.266 C 16.493 9.266 16.605 9.154 16.605 9.016 L 16.605 6.516 C 16.605 6.377 16.493 6.266 16.355 6.266 L 3.855 6.266 Z M -1.895 13.516 C -1.895 12.549 -1.111 11.766 -0.145 11.766 L 12.355 11.766 C 13.322 11.766 14.105 12.549 14.105 13.516 L 14.105 16.016 C 14.105 16.982 13.322 17.766 12.355 17.766 L -0.145 17.766 C -1.111 17.766 -1.895 16.982 -1.895 16.016 L -1.895 13.516 Z M -0.145 13.266 C -0.283 13.266 -0.395 13.377 -0.395 13.516 L -0.395 16.016 C -0.395 16.154 -0.283 16.266 -0.145 16.266 L 12.355 16.266 C 12.493 16.266 12.605 16.154 12.605 16.016 L 12.605 13.516 C 12.605 13.377 12.493 13.266 12.355 13.266 L -0.145 13.266 Z M 3.855 18.766 C 2.889 18.766 2.105 19.549 2.105 20.516 L 2.105 23.016 C 2.105 23.982 2.889 24.766 3.855 24.766 L 16.355 24.766 C 17.322 24.766 18.105 23.982 18.105 23.016 L 18.105 20.516 C 18.105 19.549 17.322 18.766 16.355 18.766 L 3.855 18.766 Z M 3.605 20.516 C 3.605 20.378 3.717 20.266 3.855 20.266 L 16.355 20.266 C 16.493 20.266 16.605 20.378 16.605 20.516 L 16.605 23.016 C 16.605 23.154 16.493 23.266 16.355 23.266 L 3.855 23.266 C 3.717 23.266 3.605 23.154 3.605 23.016 L 3.605 20.516 Z' fill='%23212121'%3E%3C/path%3E%3Cellipse style='stroke-width: 1.48px; fill: rgb(208, 7, 7);' cx='19.846' cy='15.041' rx='4.371' ry='4.371'%3E%3C/ellipse%3E%3Cpath d='M 1.17 9.218 H 2.764 V 11.489 H 4.814 V 13.254 H 2.764 V 15.524 H 1.17 V 13.254 H -0.881 V 11.489 H 1.17 Z' bx:shape='cross -0.881 9.218 5.695 6.306 1.765 1.594 0.5 1@f6c02a60' style='stroke-width: 0.55; fill: rgb(255, 255, 255); transform-box: fill-box; transform-origin: 50%25 50%25;' transform='matrix(0.707107, -0.707107, 0.707107, 0.707107, 17.946469, 2.765858)'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+        }
+        .icon.delete-zone {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='16.479 22.17 331.18 307.446' width='225.794px' height='224.074px' xmlns:bx='https://boxy-svg.com'%3E%3Cdefs%3E%3Cfilter id='inner-shadow-filter-0' bx:preset='inner-shadow 1 0.15 0.15 0.01 0.5 rgba(0,0,0,0.7)' color-interpolation-filters='sRGB' x='-50%25' y='-50%25' width='200%25' height='200%25'%3E%3CfeOffset dx='0.15' dy='0.15'%3E%3C/feOffset%3E%3CfeGaussianBlur stdDeviation='0.01'%3E%3C/feGaussianBlur%3E%3CfeComposite operator='out' in='SourceGraphic'%3E%3C/feComposite%3E%3CfeComponentTransfer result='choke'%3E%3CfeFuncA type='linear' slope='1'%3E%3C/feFuncA%3E%3C/feComponentTransfer%3E%3CfeFlood flood-color='rgba(0,0,0,0.7)' result='color'%3E%3C/feFlood%3E%3CfeComposite operator='in' in='color' in2='choke' result='shadow'%3E%3C/feComposite%3E%3CfeComposite operator='over' in='shadow' in2='SourceGraphic'%3E%3C/feComposite%3E%3C/filter%3E%3C/defs%3E%3Cg transform='matrix(11.860907, 0, 0, 11.860907, 28.972129, 31.466718)'%3E%3Cpath d='M12.0016 1.99902C17.5253 1.99902 22.0031 6.47687 22.0031 12.0006C22.0031 12.2641 21.9929 12.5253 21.9729 12.7837C21.535 12.3682 21.0392 12.0131 20.4989 11.7317C20.4804 11.1367 20.4008 10.5572 20.2662 9.99909L16.9081 9.99994C16.9404 10.3346 16.9647 10.6751 16.9806 11.0204C16.4648 11.0612 15.966 11.1622 15.4911 11.3164C15.4752 10.8662 15.4438 10.4266 15.3985 9.99999H8.60462C8.5366 10.6403 8.5 11.31 8.5 12.0006C8.5 13.0601 8.58615 14.0704 8.73973 15.0007H11.4979C11.3003 15.4747 11.1571 15.9772 11.0764 16.5003H9.06265C9.6609 18.7153 10.6643 20.2345 11.7167 20.4701C12.0003 21.0212 12.3604 21.5265 12.7829 21.9721C12.5251 21.992 12.2645 22.0021 12.0016 22.0021C6.47785 22.0021 2 17.5243 2 12.0006C2 6.47687 6.47785 1.99902 12.0016 1.99902ZM7.50986 16.5009L4.78738 16.5007C5.74572 18.0338 7.17916 19.2394 8.88154 19.9114C8.35927 19.0915 7.92828 18.0653 7.61127 16.8959L7.50986 16.5009ZM7.09497 9.99992H3.73737L3.73261 10.0171C3.58053 10.6535 3.5 11.3176 3.5 12.0006C3.5 13.0567 3.69259 14.0679 4.04456 15.0009L7.21773 15.0005C7.07543 14.0514 7 13.0432 7 12.0006C7 11.3166 7.03246 10.6474 7.09497 9.99992ZM8.8826 4.08973L8.85969 4.09844C6.81238 4.91315 5.15637 6.50046 4.2517 8.50033L7.29982 8.50069C7.61317 6.7479 8.16002 5.22198 8.8826 4.08973ZM12.0016 3.49902L11.8859 3.50432C10.6205 3.62008 9.39798 5.62205 8.83026 8.50027H15.1728C14.6067 5.63011 13.3895 3.63131 12.1278 3.50534L12.0016 3.49902ZM15.1216 4.08979L15.2284 4.26388C15.8976 5.37635 16.4057 6.83623 16.7033 8.50069L19.7514 8.50033C18.8868 6.58892 17.3358 5.05439 15.4128 4.21106L15.1216 4.08979ZM23 17.5C23 20.5376 20.5376 23 17.5 23C14.4624 23 12 20.5376 12 17.5C12 14.4624 14.4624 12 17.5 12C20.5376 12 23 14.4624 23 17.5ZM13.5 17.5C13.5 18.3335 13.755 19.1075 14.1911 19.7482L19.7482 14.1911C19.1075 13.755 18.3335 13.5 17.5 13.5C15.2909 13.5 13.5 15.2909 13.5 17.5ZM17.5 21.5C19.7091 21.5 21.5 19.7091 21.5 17.5C21.5 16.6665 21.245 15.8925 20.8089 15.2518L15.2518 20.8089C15.8925 21.245 16.6665 21.5 17.5 21.5Z' fill='%23212121'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+        }
+        .icon.new-zone {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='16.479 22.17 284.525 280.002' width='225.794px' height='224.074px' xmlns:bx='https://boxy-svg.com'%3E%3Cdefs%3E%3Cfilter id='inner-shadow-filter-0' bx:preset='inner-shadow 1 0.15 0.15 0.01 0.5 rgba(0,0,0,0.7)' color-interpolation-filters='sRGB' x='-50%25' y='-50%25' width='200%25' height='200%25'%3E%3CfeOffset dx='0.15' dy='0.15'%3E%3C/feOffset%3E%3CfeGaussianBlur stdDeviation='0.01'%3E%3C/feGaussianBlur%3E%3CfeComposite operator='out' in='SourceGraphic'%3E%3C/feComposite%3E%3CfeComponentTransfer result='choke'%3E%3CfeFuncA type='linear' slope='1'%3E%3C/feFuncA%3E%3C/feComponentTransfer%3E%3CfeFlood flood-color='rgba(0,0,0,0.7)' result='color'%3E%3C/feFlood%3E%3CfeComposite operator='in' in='color' in2='choke' result='shadow'%3E%3C/feComposite%3E%3CfeComposite operator='over' in='shadow' in2='SourceGraphic'%3E%3C/feComposite%3E%3C/filter%3E%3C/defs%3E%3Cg transform='matrix(10.920282, 0, 0, 10.920282, 23.812785, 28.362)'%3E%3Cpath d='M17.5 12C20.5376 12 23 14.4624 23 17.5C23 20.5376 20.5376 23 17.5 23C14.4624 23 12 20.5376 12 17.5C12 14.4624 14.4624 12 17.5 12ZM12.0016 2C17.5253 2 22.0031 6.47785 22.0031 12.0016C22.0031 12.2648 21.9929 12.5256 21.973 12.7837C21.5343 12.3676 21.038 12.0122 20.4971 11.7307L20.501 11.908L20.4933 11.5903C20.4674 11.0452 20.3901 10.5135 20.2662 10.0001L20.2516 10.001L16.9081 10.0009C16.9404 10.3355 16.9647 10.676 16.9806 11.0213C16.4643 11.0613 15.965 11.1624 15.4897 11.3168C15.4751 10.866 15.4437 10.427 15.3985 10.001H8.60462C8.5366 10.6412 8.5 11.3109 8.5 12.0016C8.5 13.0611 8.58615 14.0714 8.73973 15.0016L11.4976 15.0014C11.3 15.4755 11.157 15.978 11.0763 16.5011L9.06265 16.5013C9.66105 18.7168 10.6648 20.2363 11.7176 20.4713C12.0009 21.0221 12.361 21.5273 12.7835 21.9726C12.5256 21.9929 12.2648 22.0031 12.0016 22.0031C6.47785 22.0031 2 17.5253 2 12.0016C2 6.47785 6.47785 2 12.0016 2ZM17.5 13.9992L17.4101 14.0073C17.206 14.0443 17.0451 14.2053 17.0081 14.4094L17 14.4992L16.9996 16.9992L14.4977 17L14.4078 17.0081C14.2037 17.0451 14.0427 17.206 14.0057 17.4101L13.9977 17.5L14.0057 17.5899C14.0427 17.794 14.2037 17.9549 14.4078 17.9919L14.4977 18L17.0007 17.9992L17.0011 20.5035L17.0092 20.5934C17.0462 20.7975 17.2071 20.9584 17.4112 20.9954L17.5011 21.0035L17.591 20.9954C17.7951 20.9584 17.956 20.7975 17.9931 20.5934L18.0011 20.5035L18.0007 17.9992L20.5046 18L20.5944 17.9919C20.7985 17.9549 20.9595 17.794 20.9965 17.5899L21.0046 17.5L20.9965 17.4101C20.9595 17.206 20.7985 17.0451 20.5944 17.0081L20.5046 17L17.9996 16.9992L18 14.4992L17.9919 14.4094C17.9549 14.2053 17.794 14.0443 17.5899 14.0073L17.5 13.9992ZM7.50986 16.5018L4.78738 16.5017C5.74572 18.0348 7.17916 19.2404 8.88154 19.9123C8.30124 19.0014 7.83363 17.8356 7.50986 16.5018ZM3.73737 10.0009L3.73261 10.0181C3.58053 10.6545 3.5 11.3186 3.5 12.0016C3.5 13.0577 3.69259 14.0689 4.04457 15.0019L7.21773 15.0015C7.07543 14.0524 7 13.0442 7 12.0016C7 11.3175 7.03246 10.6483 7.09497 10.0009L3.75155 10.001C3.74681 10.001 3.74209 10.001 3.73737 10.0009ZM8.8826 4.0907L8.8597 4.09942C6.81238 4.91413 5.15637 6.50144 4.2517 8.5013L7.29982 8.50167C7.61317 6.74888 8.16002 5.22295 8.8826 4.0907ZM12.0016 3.5L11.8859 3.5053C10.6205 3.62106 9.39798 5.62302 8.83026 8.50125H15.1728C14.5878 5.53542 13.3076 3.5 12.0016 3.5ZM15.1216 4.09076L15.2284 4.26486C15.8976 5.37732 16.4057 6.83721 16.7033 8.50167L19.7514 8.5013C18.8435 6.49433 17.1789 4.90285 15.1216 4.09076Z' fill='%23212121'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+        }
+        .icon.save-record {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='16.479 22.17 284.525 280.002' width='225.794px' height='224.074px' xmlns:bx='https://boxy-svg.com'%3E%3Cdefs%3E%3C/defs%3E%3Cg transform='matrix(11.509959, 0, 0, 11.509959, 18.817366, 24.514172)'%3E%3Cpath d='M4 3H18L20.7071 5.70711C20.8946 5.89464 21 6.149 21 6.41421V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM7 4V9H16V4H7ZM6 12V19H18V12H6ZM13 5H15V8H13V5Z' style='fill: rgb(33, 33, 33);'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+        }
+        button[disabled] {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        input[readonly] {
+            background: #ccc;
+            cursor: no-drop;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <header>
+        <b>DNS Tool</b>
+        <div class="tools">
+            <button title="Save Record" disabled class="save-record icon" onclick="return app.saveRecord(event)"></button>
+            &nbsp;
+            <button title="New Zone" class="new-zone icon" onclick="return app.newRecord(event)"></button>
+            <!--button title="Delete Zone" class="delete-zone icon" onclick="return app.newRecord(event)"></button-->
+            <button title="New Record" disabled class="new-record icon" onclick="return app.newRecord(event)"></button>
+            <!--button title="Delete Record" class="delete-record icon" onclick="return app.deleteRecord(event)"></button-->
+        </div>
+        <div style="padding-left: 1rem; display: flex;"> Domain <input type="text" id="search" name="search"><button onclick="event.preventDefault();return false;" id="searchBtn"></button></div>
+    </header>
+    <main>
+        <form onsubmit="return false;" oninput="app.canSave(event)">
+            <div class="zones">
+                <div id='zones-wrap'>
+                    <ul tabindex="0" id="zones"> </ul>
+                </div>
+            </div>
+            <div class="records" tabindex="0">
+                <div id="details">
+                    <table>
+                        <tr>
+                            <th class='zone'>Zone</th>
+                            <th class='ttl'>TTL</th>
+                            <th class='type'>Type</th>
+                            <th class='host'>Host</th>
+                            <th class='mx_pri'>MX</th>
+                            <th class='data'>Data</th>
+                        </tr>
+                        <tbody id="zone-details">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="editor" class="empty">
+                    <!--div class="toolbar">
+                        <button title="Save Record" class="save-record icon" onclick="return app.saveRecord(event)"></button>
+                        &nbsp;
+                        <button title="New Zone" class="new-zone icon" onclick="return app.newRecord(event)"></button>
+                        <!--button title="Delete Zone" class="delete-zone icon" onclick="return app.newRecord(event)"></button-->
+                        <!--button title="New Record" class="new-record icon" onclick="return app.newRecord(event)"></button>
+                        <button title="Delete Record" class="delete-record icon" onclick="return app.deleteRecord(event)"></button>
+                    </div-->
+                    <fieldset>
+                        <legend id="zone"></legend>
+                        <div class="form-group" style="display:flex;flex-direction:row;">
+                            <div style="white-space:nowrap;">
+                                <label for="primary_ns">Primary NS</label> <input class='soa' type="text" id="primary_ns" style="width:15rem;"><br>
+                                <label for="resp_contact">Contact</label> <input class='soa' type="email" id="resp_contact" style="width:15rem;" placeholder="user@example.com">
+                            </div>
+                            <div style="white-space:nowrap;">
+                                <label for="serial">Serial</label> <input class='soa' type="number" id="serial" name="serial" style="width:8rem;"><br>
+                                <label for="serial">Refresh</label> <input class='soa' type="number" id="refresh" name="refresh" style="width:4rem;">
+                                <span><label for="serial">Retry</label> <input class='soa' type="number" id="retry" name="retry" style="width:4rem;"></span>
+                                <span style="display:none;"><label for="serial">Expire</label> <input class='soa' type="number" id="expire" name="expire" style="width:6rem;"></span>
+                                <span style="display:none;"><label for="serial">Min</label> <input class='soa' type="number" id="minimum" name="minimum" style="width:4rem;"></span>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="recordWrap">
+                        <div class="form-group">
+                            <label for="zone">Zone</label> <input type="text" id="domain" name="domain" value="" readonly>
+                            <label for="id">ID</label> <input type="text" id="id" name="id" value="" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Type</label> <select id="type" name="type"><option value="NS">NS</option><option value="A">A</option><option value="AAAA">AAAA</option><option value="CNAME">CNAME</option><option value="MX">MX</option><option value="TXT">TXT</option></select>
+                            <label for="data">Data</label>
+                            <input type="text" id="data" style="width: 30rem;">
+                       </div>
+                        <div class="form-group">
+                            <label for="ttl">TTL</label> <input type="number" id="ttl" value="3600" size="5" style="width: 5rem;">
+                            <label for="mx_priority">MX Pri</label> <input type="number" id="mx_priority" name="mx_priority" style="width:5rem;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+<script type="module" src="js/main.js"></script>
+</body>
+
+</html>
