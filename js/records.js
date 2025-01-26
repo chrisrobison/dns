@@ -5,9 +5,12 @@ import { UIService } from './ui.js';
 export const RecordManager = {
     loadZoneRecords(records) {
         let output = '';
+
+        if (records.data) records = records.data;
         records.forEach((record, index) => {
             output += this.renderRecordRow(record, index === 0);
         });
+        document.querySelector("#zone-details").innerHTML = output;
         return output;
     },
 

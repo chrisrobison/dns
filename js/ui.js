@@ -12,7 +12,7 @@ export const UIService = {
 
     init() {
         this.bindEvents();
-        this.initializeUI();
+        // this.initializeUI();
     },
 
     bindEvents() {
@@ -27,6 +27,11 @@ export const UIService = {
             this.updateSelection(event.target);
             ZoneManager.selectZone(event.target.innerText);
         }
+    },
+    
+    updateSelection(el) {
+        document.querySelectorAll(".selected").forEach(tag=>{ if (el!==tag) tag.classList.remove('selected') } );
+        el.classList.add('selected');
     },
 
     handleRecordClick(event) {

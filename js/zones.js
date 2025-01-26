@@ -7,12 +7,14 @@ import { UIService } from './ui.js';
 export const ZoneManager = {
     async loadZones() {
         const data = await APIService.getZones();
+        console.log(`got zone data`, data);
         return this.renderZoneList(data);
     },
 
     renderZoneList(zones) {
+        if (zones.data) zones = zones.data;
         return zones.map(zone => `
-            <li>${zone} 
+            <li class='zone_li'>${zone} 
                 <a title="Delete entire zone" 
                    onclick="DNSApp.zones.confirmDelete('${zone}')" 
                    class="delete">
