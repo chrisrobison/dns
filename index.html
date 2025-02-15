@@ -483,7 +483,7 @@
                 },
                 fetch: function(url, callback) {
                     fetch(url).then(response => response.json()).then(data => {
-                        app.data = data;
+                        app.data = data.data;
                         app.state.loaded = true;
                         if (callback && typeof(callback) === "function") {
                             callback(data);
@@ -702,6 +702,9 @@
                 loadZone(data) {
                     let out = "";
                     let first = 0;
+
+                    if (data.data) data = data.data;
+
                     let rows = data.length;
                     for (const row of data) {
                         row.mx_priority = (row.mx_priority != null) ? row.mx_priority : '';
@@ -738,9 +741,11 @@
                 },
                 loadZones(data) {
                     let out = "";
-
-                    for (const item of data) {
-                        out += `<li>${item} <a title="Delete entire zone" onclick="app.confirmFullDelete()" class="delete"><i class="fas fa-trash-can"></i></a></li>`;
+                    if (data.data) data = data.data; 
+                    if (data) {
+                        for (const item of data) {
+                            out += `<li>${item} <a title="Delete entire zone" onclick="app.confirmFullDelete()" class="delete"><i class="fas fa-trash-can"></i></a></li>`;
+                        }
                     }
                     $("#zones").innerHTML = out;
                 },
