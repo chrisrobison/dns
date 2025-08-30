@@ -243,7 +243,8 @@ function getZone() {
     global $link;
     global $in;
     $out = array();
-    $result = mysqli_query($link, "SELECT * from dns where zone='{$in['zone']}'");
+    $zone = mysqli_real_escape_string($link, $in['zone']);
+    $result = mysqli_query($link, "SELECT * from dns where zone='{$zone}'");
 
     while ($row = mysqli_fetch_object($result)) {
         $out[] = $row;
